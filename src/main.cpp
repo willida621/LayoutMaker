@@ -101,6 +101,13 @@ class $modify(MyEditorUI, EditorUI) {
                 setColorActionValues(colorAction, color, 1.0f, false);
             }
         }
+
+        const auto notificationText = fmt::format(
+            "Removed: {} decoration types, {} triggers",
+            deco_ids.size(), trigger_ids.size()
+        );
+        
+        Notification::create(notificationText, NotificationIcon::Success)->show();
     }
 
     void onStopPlaytest(CCObject* sender) {
