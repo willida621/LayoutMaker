@@ -44,7 +44,7 @@ class $modify(MyEditorUI, EditorUI) {
         if (!menu) return true;
 
         CCLabelBMFont* label = CCLabelBMFont::create("Delete Deco", "goldFont.fnt");
-        CCSprite* sprite = CircleButtonSprite::create(label, CircleBaseColor::gray);
+        CCSprite* sprite = CircleButtonSprite::create(label, CircleBaseColor::Gray);
 
         m_trashButton = CCMenuItemSpriteExtra::create(
             sprite, this,
