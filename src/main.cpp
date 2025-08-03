@@ -46,7 +46,7 @@ class $modify(MyEditorUI, EditorUI) {
         CCLabelBMFont* label = CCLabelBMFont::create("Delete\nDeco", "goldFont.fnt");
         CCSprite* sprite = CircleButtonSprite::create(label, CircleBaseColor::Gray);
         sprite->setScale(.8f);
-        label->setScale(.4f);
+        label->setScale(.375f);
         label->setAlignment(kCCTextAlignmentCenter);
 
         m_trashButton = CCMenuItemSpriteExtra::create(
