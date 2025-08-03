@@ -1,21 +1,27 @@
-# LayoutMaker
-This is where she makes a mod.
+# LayoutMaker - Instant Level Layout Conversion
 
-<img src="logo.png" width="150" alt="the mod's logo" />
+## Overview
+LayouMaker that allows you to quickly convert any level into a Layout. This mod streamlines the level creation process by providing tools to remove unnecessary decorative objects and triggers.
 
-## Getting started
-We recommend heading over to [the getting started section on our docs](https://docs.geode-sdk.org/getting-started/) for useful info on what to do next.
+## Features
+- **One-Click Layout Conversion**: Instantly strip down your level to its essential gameplay elements with a single button.
+- **Smart Object Removal**: 
+  - Removes all decorative objects (such as custom decorations, non-essential blocks, and effects) that are not part of the core gameplay.
+  - Clears out triggers that are not necessary for the layout, keeping only vital gameplay mechanics.
+- **Color Reset**: Resets all color channels to default values (white), ensuring a clean and consistent layout appearance.
+- **Preservation of Gameplay Elements**: Adds a "Delete Deco" button to the editor for easy access.
+  
+## How It Works
+1. Open your decorated level in the editor
+2. Click the new **Delete Deco** button
+3. Watch decorations instantly disappear
+4. Notification confirms removed elements
+5. Continue building from a clean layout
 
-## Build instructions
-For more info, see [our docs](https://docs.geode-sdk.org/getting-started/create-mod#build)
-```sh
-# Assuming you have the Geode CLI set up already
-geode build
-```
+## Installation
+1. Download the mod package
+2. Place in Geometry Dash `mods` folder
+3. Enable in your mod loader
+4. Restart Geometry Dash
 
-# Resources
-* [Geode SDK Documentation](https://docs.geode-sdk.org/)
-* [Geode SDK Source Code](https://github.com/geode-sdk/geode/)
-* [Geode CLI](https://github.com/geode-sdk/cli)
-* [Bindings](https://github.com/geode-sdk/bindings/)
-* [Dev Tools](https://github.com/geode-sdk/DevTools)
+> **Note**: Always back up levels before major edits
