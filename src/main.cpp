@@ -111,7 +111,7 @@ class $modify(MyEditorUI, EditorUI) {
     void onPlaytest(CCObject* sender) {
         EditorUI::onPlaytest(sender);
         if (!m_trashButton || !m_editorLayer) return;
-        m_trashButton->setVisible(m_editorLayer->m_playbackMode == PlaybackMode::Not);
+        m_trashButton->setVisible(m_editorLayer->m_playbackMode != PlaybackMode::Playing);
     }
 };
 
