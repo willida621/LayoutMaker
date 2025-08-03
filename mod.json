@@ -1,0 +1,19 @@
+{
+	"geode": "4.7.0",
+	"gd": {
+		"win": "2.2074",
+		"android": "2.2074",
+		"mac": "2.2074",
+		"ios": "2.2074"
+	},
+	"id": "radik569.layoutmaker",
+	"name": "LayoutMaker",
+	"version": "v1.0.0",
+	"developer": "radik569",
+	"resources": {
+		"sprites": [
+			"resources/L_ButtonMaker.png"
+		]
+	},
+	"description": "The best layout mod"
+}
