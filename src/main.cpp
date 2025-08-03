@@ -41,11 +41,13 @@ class $modify(MyEditorUI, EditorUI) {
         if (!EditorUI::init(layer)) return false;
 
         auto menu = this->getChildByID("settings-menu");
-        if (!menu) return  true;
+        if (!menu) return true;
+
+        CCLabelBMFont* label = CCLabelBMFont::create("Delete Deco", "goldFont.fnt");
+        CCSprite* sprite = CircleButtonSprite::create(label, CircleBaseColor::gray);
 
         m_trashButton = CCMenuItemSpriteExtra::create(
-            CCSprite::create("L_ButtonMaker.png"_spr),
-            this,
+            sprite, this,
             menu_selector(MyEditorUI::onTrashButton)
         );
         m_trashButton->setID("trash-button"_spr);
