@@ -8,7 +8,8 @@
 	},
 	"id": "radik569.layoutmaker",
 	"name": "LayoutMaker",
-	"version": "v1.0.0",
+	"version": "v1.1.2",
+	"tags": ["editor", "utility", "gameplay"],
 	"developer": "radik569",
 	"description": "Turn any level into a layout"
 }
