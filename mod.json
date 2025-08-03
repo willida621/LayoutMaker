@@ -10,10 +10,5 @@
 	"name": "LayoutMaker",
 	"version": "v1.0.0",
 	"developer": "radik569",
-	"resources": {
-		"sprites": [
-			"resources/L_ButtonMaker.png"
-		]
-	},
-	"description": "The best layout mod"
+	"description": "Turn any level into a layout"
 }
