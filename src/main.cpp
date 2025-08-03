@@ -1,4 +1,3 @@
-#include <Geode/modify/LevelEditorLayer.hpp>
 #include <Geode/modify/EditorUI.hpp>
 
 using namespace geode::prelude;
@@ -18,25 +17,11 @@ static constexpr std::array<std::pair<int, cocos2d::ccColor3B>, 6> specialColors
     {1014, {40, 125, 255}}
 }};
 
-void setColorActionValues(auto* colorAction, const cocos2d::ccColor3B& color, 
-                        float opacity, bool blending) {
-    colorAction->m_color = color;
-    colorAction->m_fromColor = color;
-    colorAction->m_toColor = color;
-    colorAction->m_currentOpacity = opacity;
-    colorAction->m_fromOpacity = opacity;
-    colorAction->m_toOpacity = opacity;
-    colorAction->m_blending = blending;
-        
-    if (colorAction->m_colorSprite) {
-        colorAction->m_colorSprite->m_color = color;
-        colorAction->m_colorSprite->m_opacity = opacity;
-    }
-}
-
-static CCMenuItemSpriteExtra* m_trashButton = nullptr;
-
 class $modify(MyEditorUI, EditorUI) {
+    struct Fields {
+        CCMenuItemSpriteExtra* m_trashButton;
+    };
+
     bool init(LevelEditorLayer* layer) {
         if (!EditorUI::init(layer)) return false;
 
@@ -49,14 +34,30 @@ class $modify(MyEditorUI, EditorUI) {
         label->setScale(.375f);
         label->setAlignment(kCCTextAlignmentCenter);
 
-        m_trashButton = CCMenuItemSpriteExtra::create(
+        m_fields->m_trashButton = CCMenuItemSpriteExtra::create(
             sprite, this,
             menu_selector(MyEditorUI::onTrashButton)
         );
-        m_trashButton->setID("trash-button"_spr);
-        menu->addChild(m_trashButton);
+        m_fields->m_trashButton->setID("trash-button"_spr);
+        menu->addChild(m_fields->m_trashButton);
         menu->updateLayout();
         return true;
+    }
+
+    void setColorActionValues(auto* colorAction, const cocos2d::ccColor3B& color, 
+                        float opacity, bool blending) {
+        colorAction->m_color = color;
+        colorAction->m_fromColor = color;
+        colorAction->m_toColor = color;
+        colorAction->m_currentOpacity = opacity;
+        colorAction->m_fromOpacity = opacity;
+        colorAction->m_toOpacity = opacity;
+        colorAction->m_blending = blending;
+            
+        if (colorAction->m_colorSprite) {
+            colorAction->m_colorSprite->m_color = color;
+            colorAction->m_colorSprite->m_opacity = opacity;
+        }
     }
 
     void onTrashButton(CCObject* sender) {
@@ -89,16 +90,16 @@ class $modify(MyEditorUI, EditorUI) {
         const cocos2d::ccColor3B white = {255, 255, 255};
         
         for (int id = 1; id <= 999; ++id) {
-            auto* colorAction = em->getColorAction(id);
-            if (!colorAction) continue;
-            
-            setColorActionValues(colorAction, white, 1.0f, false);
+            if (id >= 1000) continue;
+
+            if (auto* action = em->getColorAction(id)) {
+                setColorActionValues(action, white, 1.0f, false);
+            }
         }
         
         for (const auto& [id, color] : specialColors) {
-            auto* colorAction = em->getColorAction(id);
-            if (colorAction) {
-                setColorActionValues(colorAction, color, 1.0f, false);
+            if (auto* action = em->getColorAction(id)) {
+                setColorActionValues(action, color, 1.0f, false);
             }
         }
 
@@ -110,21 +111,24 @@ class $modify(MyEditorUI, EditorUI) {
         Notification::create(notificationText, NotificationIcon::Success)->show();
     }
 
+    void updateTrashButtonVisibility() {
+        if (!m_fields->m_trashButton) return;
+
+        bool visible = true;
+        if (m_editorLayer && m_editorLayer->m_playbackMode == PlaybackMode::Playing) {
+            visible = false;
+        }
+
+        m_fields->m_trashButton->setVisible(visible);
+    }
+
     void onStopPlaytest(CCObject* sender) {
         EditorUI::onStopPlaytest(sender);
-        if (m_trashButton) m_trashButton->setVisible(true);
+        updateTrashButtonVisibility();
     }
 
     void onPlaytest(CCObject* sender) {
         EditorUI::onPlaytest(sender);
-        if (!m_trashButton || !m_editorLayer) return;
-        m_trashButton->setVisible(m_editorLayer->m_playbackMode != PlaybackMode::Playing);
-    }
-};
-
-class $modify(LevelEditorLayer) {
-    void onStopPlaytest() {
-        LevelEditorLayer::onStopPlaytest();
-        if (m_trashButton) m_trashButton->setVisible(true);
+        updateTrashButtonVisibility();
     }
 };
