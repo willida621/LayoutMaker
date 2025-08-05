@@ -1,0 +1,15 @@
+{
+	"geode": "4.7.0",
+	"gd": {
+		"win": "2.2074",
+		"android": "2.2074",
+		"mac": "2.2074",
+		"ios": "2.2074"
+	},
+	"id": "radik569.layoutmaker",
+	"name": "LayoutMaker",
+	"version": "v1.1.2",
+	"tags": ["editor", "utility", "gameplay"],
+	"developer": "radik569",
+	"description": "Turn any level into a layout"
+}
